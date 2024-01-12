@@ -9,7 +9,6 @@ import java.util.List;
 
 @Mapper
 public interface SetmealDishMapper {
-     List<Long> getSetmealIdsByDishIds(List<Long> dishIds);
 
     /**
      * 批量保存套餐和菜品的关联关系
@@ -31,4 +30,19 @@ public interface SetmealDishMapper {
      */
     @Select("select * from setmeal_dish where setmeal_id = #{setmealId}")
     List<SetmealDish> getBySetmealId(Long setmealId);
+
+    /**
+     * 根据批量菜品ids查询菜品对应套餐ids
+     * @param dishIds
+     * @return
+     */
+    List<Long> getSetmealIdsByDishIds(List<Long> dishIds);
+
+    /**
+     * 根据菜品id查询菜品对应套餐关系
+     * @param id
+     * @return
+     */
+    @Select("select * from setmeal_dish where dish_id = #{id}")
+    SetmealDish getSetmealDishByDishId(Long id);
 }
