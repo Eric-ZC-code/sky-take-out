@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface SetmealMapper {
@@ -67,12 +68,12 @@ public interface SetmealMapper {
     @Delete("delete from setmeal where id = #{id}")
     void deleteById(Long setmealId);
 
+    void update(Setmeal setmeal);
+
     /**
-     * 根据id查询套餐和套餐菜品关系
-     * @param id
+     * 根据条件统计套餐数量
+     * @param map
      * @return
      */
-    SetmealVO getByIdWithDish(Long id);
-
-    void update(Setmeal setmeal);
+    Integer countByMap(Map map);
 }

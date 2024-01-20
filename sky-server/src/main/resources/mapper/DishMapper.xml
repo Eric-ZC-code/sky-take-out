@@ -25,7 +25,7 @@
     <select id="pageQuery" resultType="com.sky.vo.DishVO">
         select d.*, c.name as categoryName from dish d left outer join category c on d.category_id = c.id
         <where>
-            <if test="name != null">
+            <if test="name != null and name != ''">
                 and d.name like concat('%',#{name},'%')
             </if>
             <if test="categoryId != null">
@@ -52,5 +52,17 @@
             </if>
         </where>
         order by create_time desc
+    </select>
+
+    <select id="countByMap" resultType="java.lang.Integer">
+        select count(id) from dish
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+        </where>
     </select>
 </mapper>
